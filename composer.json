@@ -1,0 +1,15 @@
+{
+    "name": "jamangueira7/jamjs7",
+    "autoload": {
+        "psr-4": {
+            "app\\": "./"
+        }
+    },
+    "authors": [
+        {
+            "name": "João Mangueira",
+            "email": "jamjs7@gmail.com"
+        }
+    ],
+    "require": {}
+}
