@@ -1,14 +1,29 @@
 <?php
 
-class m01_inital
+use app\core\Application;
+
+class m0001_inital
 {
     public function up()
     {
-        echo "up migration";
+        $db = Application::$app->db;
+        $SQL = "CREATE TABLE users (
+                id serial PRIMARY KEY,
+                email VARCHAR(255) NOT NULL,
+                firstname VARCHAR(255) NOT NULL,
+                lastname VARCHAR(255) NOT NULL,
+                status SMALLINT DEFAULT 0,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            );";
+
+        $db->pdo->exec($SQL);
     }
 
     public function down()
     {
-        echo "down migration";
+        $db = Application::$app->db;
+        $SQL = "DROP TABLE users;";
+
+        $db->pdo->exec($SQL);
     }
 }

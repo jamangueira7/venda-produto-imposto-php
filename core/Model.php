@@ -21,6 +21,16 @@ abstract class Model
         }
     }
 
+    public function labels()
+    {
+        return [];
+    }
+
+    public function getLabel($attribute)
+    {
+        return $this->labels()[$attribute] ?? $attribute;
+    }
+
     abstract public function rules(): array;
     public function validate()
     {

@@ -1,11 +1,21 @@
 <?php
 namespace app\models;
 
-use app\core\Model;
+use app\core\DbModel;
 
-class Product extends Model
+class Product extends DbModel
 {
     public string $firstname = '';
+    public string $lastname = '';
+    public string $email = '';
+    public int $status = 0;
+    public string $password = '';
+    public string $passwordConfirm = '';
+
+    public static function tableName(): string
+    {
+        return "users";
+    }
 
     public function register()
     {
@@ -17,5 +27,10 @@ class Product extends Model
         return [
             "firstname" => [self::RULE_REQUIRED]
         ];
+    }
+
+    public function attributes(): array
+    {
+    return ["email", "firstname", "lastname", "status"];
     }
 }

@@ -20,7 +20,7 @@ class AuthController extends Controller
         if($request->method() === 'post') {
             $product->loadData($request->getBody());
 
-            if($product->validate() && $product->register()) {
+            if($product->validate() && $product->save()) {
                 return 'success';
             }
 
