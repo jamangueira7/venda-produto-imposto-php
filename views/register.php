@@ -1,9 +1,16 @@
-<h1>Contact</h1>
+<h1>Register</h1>
 
 <form action="" method="post">
     <div class="mb-3">
-        <label class="form-label">Subject</label>
-        <input type="text" class="form-control" name="subject">
+        <label class="form-label">Nome</label>
+        <input
+        type="text"
+        class="form-control<?= $model->hasError('firstname') ? ' is-invalid' : ''?>
+        name="firstname"
+        value="<?= $model->firstname ?>">
+        <div class="invalid-feedback">
+            <?= $model->getFirstError('firstname') ?>
+        </div>
     </div>
     <div class="mb-3">
         <label class="form-label">Email</label>
