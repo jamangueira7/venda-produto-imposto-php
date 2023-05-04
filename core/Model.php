@@ -73,7 +73,7 @@ abstract class Model
                     $statement->execute();
                     $record = $statement->fetchObject();
                     if($record) {
-                        $this->addError($attribute, self::RULE_UNIQUE, ['field' => $attribute]);
+                        $this->addError($attribute, self::RULE_UNIQUE, ['field' => $this->getLabel($attribute)]);
                     }
                 }
             }
