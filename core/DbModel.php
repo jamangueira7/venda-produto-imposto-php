@@ -27,7 +27,7 @@ abstract class DbModel extends Model
 
     public static function findOne($where)
     {
-        $tableName = DbModel::tableName();
+        $tableName = $this->tableName();
         $attributes = array_keys($where);
         $sql = implode("AND", array_map(fn($attr) => "$attr = :$attr", $attributes));
         $statement = self::prepare("SELECT * FROM $tableName WHERE $sql");

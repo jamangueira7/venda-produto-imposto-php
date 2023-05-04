@@ -9,6 +9,7 @@ abstract class Model
     public const RULE_MIN = "min";
     public const RULE_MAX = "max";
     public const RULE_MATCH = "match";
+    public const RULE_UNIQUE = "unique";
 
     public array $errors = [];
 
@@ -61,6 +62,20 @@ abstract class Model
                 if ($ruleName === self::RULE_MATCH && $value !== $this->{$rule['match']}) {
                     $this->addError($attribute, self::RULE_MATCH, $rule);
                 }
+
+                if ($ruleName === self::RULE_UNIQUE) {
+                    $class_name = $rule['class'];
+                    $unique_attr = $rules['attribute'] ?? $attribute;
+                    $table_name = $class_name::tableName();
+
+                    $statement = Application::$app->db->prepare("SELECT * FROM $table_name WHERE $unique_attr = :attr");
+                    $statement->bindValue(":attr", $value);
+                    $statement->execute();
+                    $record = $statement->fetchObject();
+                    if($record) {
+                        $this->addError($attribute, self::RULE_UNIQUE, ['field' => $attribute]);
+                    }
+                }
             }
         }
 
@@ -70,8 +85,9 @@ abstract class Model
     public function addError(string $attribute, string $rule, $params = [])
     {
         $message = $this->errorMessages()[$rule] ?? "";
+
         foreach ($params as $key => $value) {
-            $message = str_replace("{{key}}", $value, $message);
+            $message = str_replace("{{$key}}", $value, $message);
         }
         $this->errors[$attribute][] = $message;
     }
@@ -84,6 +100,7 @@ abstract class Model
             self::RULE_MIN => "Esse campo precisa ter o tamanho mínimo de {min}",
             self::RULE_MAX => "Esse campo precisa ter o tamanho máximo de {max}",
             self::RULE_MATCH => "Esse campo precisa ser igual ao campo {match}",
+            self::RULE_UNIQUE => "Um registro do {field} já existe",
         ];
     }
 
