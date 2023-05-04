@@ -12,6 +12,7 @@ class m0001_inital
                 email VARCHAR(255) NOT NULL,
                 firstname VARCHAR(255) NOT NULL,
                 lastname VARCHAR(255) NOT NULL,
+                password VARCHAR(255) NOT NULL,
                 status SMALLINT DEFAULT 0,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             );";
