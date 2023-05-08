@@ -25,7 +25,7 @@ $this->title = "Lista de typos de produto";
         <tr>
             <td><?php echo $type->name ?></td>
             <td><?php echo $type->tax ?> %</td>
-            <td></td>
+            <td><a class="btn btn-primary" href="<?php echo $type->id ?>" role="button">Detalhe</a></td>
         </tr>
     <?php
     endforeach;

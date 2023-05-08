@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\core\Application;
 use app\core\Controller;
+use app\core\exceptions\NotFoundException;
 use app\core\middlewares\AuthMiddleware;
 use app\core\Request;
 use app\core\Response;
@@ -44,6 +45,34 @@ class ProductController extends Controller
         return $this->render('product_list', [
             'products' => $product->findAll(),
             'types' => $model,
+        ]);
+
+    }
+
+    public function detail(Request $request, Response $response)
+    {
+
+        $product = new Product();
+        $model = new ProductType();
+
+        $data = $product->findOne(["id" => $request->id]);
+
+        if(empty($data)) {
+            throw new NotFoundException();
+        }
+
+
+        if($request->method() === 'post') {
+            $product->loadData($request->getBody());
+            if($product->validate() && $product->change($request->id)) {
+                $response->redirect("/product/list");
+                return;
+            }
+        }
+
+        return $this->render('product_detail', [
+            'model' => $data,
+            'types' => $model->findAll(),
         ]);
 
     }

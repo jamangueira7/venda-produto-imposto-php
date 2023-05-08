@@ -31,7 +31,14 @@ class Router
         $path = $this->request->getPath();
         $method = $this->request->method();
 
-        $callback = $this->routes[$method][$path] ?? false;
+        $path_parts = explode("/", $path);
+        if(is_numeric($path_parts[2]) && count($path_parts) === 3) {
+            $new_url = "/$path_parts[1]/" .'$id';
+            $callback = $this->routes[$method][$new_url] ?? false;
+            $this->request->id = $path_parts[2];
+        } else {
+            $callback = $this->routes[$method][$path] ?? false;
+        }
 
         if($callback === false) {
             throw new NotFoundException();

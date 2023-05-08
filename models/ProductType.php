@@ -25,9 +25,14 @@ class ProductType extends UserModel
 
     public function save()
     {
-        var_dump($this->tax);
         return parent::save();
     }
+
+    public function change(int $id)
+    {
+        return parent::change($id);
+    }
+
 
     public function attributes(): array
     {

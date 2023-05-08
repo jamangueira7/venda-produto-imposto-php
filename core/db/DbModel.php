@@ -28,6 +28,22 @@ abstract class DbModel extends Model
         return true;
     }
 
+    public function change(int $id)
+    {
+        $tableName = $this->tableName();
+        $attributes = $this->attributes();
+        $params = array_map(fn($attr) => "$attr=:$attr", $attributes);
+
+        $statement = self::prepare("UPDATE $tableName  SET " . implode(",", $params) . " WHERE id = $id");
+
+        foreach ($attributes as $attribute) {
+            $statement->bindParam(":$attribute", $this->{$attribute});
+        }
+        $statement->execute();
+
+        return true;
+    }
+
     public static function prepare($sql): \PDOStatement
     {
         return Application::$app->db->prepare($sql);

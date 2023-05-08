@@ -28,7 +28,7 @@ $this->title = "Lista de produtos";
             <td><?php echo $product->name ?></td>
             <td><?php echo $types->findOne(["id" => $product->product_type_id])->name ?></td>
             <td><?php echo $product->price ?></td>
-            <td></td>
+            <td><a class="btn btn-primary" href="<?php echo $product->id ?>" role="button">Detalhe</a></td>
         </tr>
     <?php
     endforeach;

@@ -32,6 +32,11 @@ class Product extends UserModel
         return parent::save();
     }
 
+    public function change(int $id)
+    {
+        return parent::change($id);
+    }
+
     public function attributes(): array
     {
         return ["name", "description", "price", "product_type_id"];

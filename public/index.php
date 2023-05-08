@@ -34,11 +34,15 @@ $app->router->get('/logout', [AuthController::class, 'logout']);
 $app->router->get('/profile', [AuthController::class, 'profile']);
 
 $app->router->get('/types/list', [ProductTypeController::class, 'list']);
+$app->router->get('/types/$id', [ProductTypeController::class, 'detail']);
+$app->router->post('/types/$id', [ProductTypeController::class, 'detail']);
 $app->router->get('/types/create', [ProductTypeController::class, 'create']);
 $app->router->post('/types/create', [ProductTypeController::class, 'create']);
 
 $app->router->get('/product/list', [ProductController::class, 'list']);
 $app->router->get('/product/create', [ProductController::class, 'create']);
 $app->router->post('/product/create', [ProductController::class, 'create']);
+$app->router->get('/product/$id', [ProductController::class, 'detail']);
+$app->router->post('/product/$id', [ProductController::class, 'detail']);
 
 $app->run();

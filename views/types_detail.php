@@ -5,10 +5,10 @@ use app\core\form\Form;
 
 $form = new Form();
 
-$this->title = "Criar tipo do produto";
+$this->title = "Alterar tipo do produto";
 ?>
 
-<h1 class="display-3 text-center m-lg-5">Criar tipo do produto</h1>
+<h1 class="display-3 text-center m-lg-5">Alterar tipo do produto</h1>
 
 <?php $form = Form::begin('', 'post') ?>
 
