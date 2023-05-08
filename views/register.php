@@ -1,5 +1,5 @@
 <?php
-/** @var $model \thecodeholic\phpmvc\Model */
+/** @var $model app\core\Model */
 
 use app\core\form\Form;
 

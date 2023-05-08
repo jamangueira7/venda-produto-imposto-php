@@ -6,6 +6,11 @@ abstract class DbModel extends Model
 {
     abstract public static function tableName(): string;
     abstract public function attributes(): array;
+    public static function primaryKey(): string
+    {
+        return 'id';
+    }
+
     public function save()
     {
         $tableName = $this->tableName();
@@ -27,7 +32,7 @@ abstract class DbModel extends Model
 
     public static function findOne($where)
     {
-        $tableName = $this->tableName();
+        $tableName = static::tableName();
         $attributes = array_keys($where);
         $sql = implode("AND", array_map(fn($attr) => "$attr = :$attr", $attributes));
         $statement = self::prepare("SELECT * FROM $tableName WHERE $sql");

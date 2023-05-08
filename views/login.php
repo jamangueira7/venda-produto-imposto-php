@@ -1,17 +1,17 @@
-<h1>Contact</h1>
+<?php
+/** @var $model app\models\User */
 
-<form action="" method="post">
-    <div class="mb-3">
-        <label class="form-label">Subject</label>
-        <input type="text" class="form-control" name="subject">
-    </div>
-    <div class="mb-3">
-        <label class="form-label">Email</label>
-        <input type="email" class="form-control" name="email">
-    </div>
-    <div class="mb-3">
-        <label class="form-label">Body</label>
-        <textarea name="body" class="form-control" ></textarea>
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+use app\core\form\Form;
+
+$form = new Form();
+?>
+
+    <h1>Login</h1>
+
+<?php $form = Form::begin('', 'post') ?>
+
+    <?php echo $form->field($model, 'email') ?>
+    <?php echo $form->field($model, 'password')->passwordField() ?>
+
+    <button type="submit" class="btn btn-success">Logar</button>
+<?php Form::end() ?>

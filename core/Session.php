@@ -31,7 +31,7 @@ class Session
         return $_SESSION[self::FLASH_KEY][$key]['value'] ?? false;
     }
 
-    public function set($key, $value)
+    public function set($key, $value) :void
     {
         $_SESSION[$key] = $value;
     }

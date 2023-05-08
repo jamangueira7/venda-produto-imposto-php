@@ -1,9 +1,9 @@
 <?php
 namespace app\models;
 
-use app\core\DbModel;
+use app\core\UserModel;
 
-class User extends DbModel
+class User extends UserModel
 {
     public string $firstname = '';
     public string $lastname = '';
@@ -55,5 +55,8 @@ class User extends DbModel
         ];
     }
 
-
+    public function getDisplayName(): string
+    {
+        return $this->firstname . " " . $this->lastname;
+    }
 }
