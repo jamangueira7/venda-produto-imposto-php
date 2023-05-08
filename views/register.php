@@ -4,6 +4,8 @@
 use app\core\form\Form;
 
 $form = new Form();
+
+$this->title = "Perfil";
 ?>
 
     <h1>Register</h1>

@@ -2,18 +2,16 @@
 
 use app\core\Application;
 
-class m0001_inital
+class m0003_create_products_type
 {
     public function up()
     {
         $db = Application::$app->db;
-        $SQL = "CREATE TABLE users (
+        $SQL = "CREATE TABLE product_type (
                 id serial PRIMARY KEY,
-                email VARCHAR(255) NOT NULL,
-                firstname VARCHAR(255) NOT NULL,
-                lastname VARCHAR(255) NOT NULL,
-                password VARCHAR(255) NOT NULL,
-                status SMALLINT DEFAULT 0,
+                name VARCHAR(255) NOT NULL,
+                description VARCHAR(255) NOT NULL,
+                tax FLOAT NOT NULL,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             );";
 
@@ -23,7 +21,7 @@ class m0001_inital
     public function down()
     {
         $db = Application::$app->db;
-        $SQL = "DROP TABLE users;";
+        $SQL = "DROP TABLE product_type;";
 
         $db->pdo->exec($SQL);
     }
