@@ -2,7 +2,7 @@
 namespace app\models;
 
 use app\core\Application;
-use app\core\DbModel;
+use app\core\db\DbModel;
 
 class LoginForm extends DbModel
 {
