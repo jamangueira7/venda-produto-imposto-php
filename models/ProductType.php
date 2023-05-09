@@ -5,6 +5,7 @@ use app\core\db\DbModel;
 
 class ProductType extends DbModel
 {
+    private int $id_manipulate = 0;
     public string $name = '';
     public string $description = '';
     public float $tax = 0.0;
@@ -46,5 +47,14 @@ class ProductType extends DbModel
             "description" => "Descrição",
             "tax" => "Procentagem"
         ];
+    }
+
+    public function getId(): int
+    {
+    }
+
+    public function setId(int $id): void
+    {
+        $this->id_manipulate = $id;
     }
 }

@@ -6,6 +6,7 @@ use app\core\db\DbModel;
 
 class LoginForm extends DbModel
 {
+    private int $id_manipulate = 0;
     public string $email = '';
     public string $password = '';
 
@@ -23,6 +24,16 @@ class LoginForm extends DbModel
             ],
             "password" => [self::RULE_REQUIRED]
         ];
+    }
+
+    public function getId(): int
+    {
+        return $this->id_manipulate;
+    }
+
+    public function setId(int $id): void
+    {
+        $this->id_manipulate = $id;
     }
 
     public function login()

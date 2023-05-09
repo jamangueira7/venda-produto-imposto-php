@@ -5,7 +5,7 @@ use app\core\db\DbModel;
 
 class Product extends DbModel
 {
-
+    private int $id_manipulate = 0;
     public string $name = '';
     public string $description = '';
     public string $image = '';
@@ -16,6 +16,16 @@ class Product extends DbModel
     public static function tableName(): string
     {
         return "products";
+    }
+
+    public function getId(): int
+    {
+        return $this->id_manipulate;
+    }
+
+    public function setId(int $id): void
+    {
+        $this->id_manipulate = $id;
     }
 
     public function rules(): array
@@ -58,6 +68,9 @@ class Product extends DbModel
     {
         $product_type = new ProductType();
         $products = [];
+        $total_products = 0.0;
+        $amount_without_tax = 0.0;
+        $amount_with_tax = 0.0;
 
         foreach ($cart as $item) {
 
@@ -78,7 +91,13 @@ class Product extends DbModel
                 "price_tax" => $total,
             ];
 
+            $total_products += $total;
+            $amount_without_tax += $price_quantity;
+            $amount_with_tax += $price_tax;
         }
+        $products['total'] = $total_products;
+        $products['amount_without_tax'] = $amount_without_tax;
+        $products['amount_with_tax'] = $amount_with_tax;
         return $products;
     }
 }

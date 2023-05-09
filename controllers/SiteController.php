@@ -8,7 +8,9 @@ use app\core\Request;
 use app\core\Response;
 use app\models\Cart;
 use app\models\Product;
+use app\models\ProductSale;
 use app\models\ProductType;
+use app\models\Sale;
 
 class SiteController extends Controller
 {
@@ -37,6 +39,43 @@ class SiteController extends Controller
         return;
     }
 
+    public function buy(Request $request, Response $response)
+    {
+        $cart = Application::$app->session->get('cart');
+        $user = Application::$app->session->get('user');
+
+        $product = new Product();
+        if($cart) {
+            $data = $product->prepareData($cart['products']);
+        }
+
+        $sale = new Sale();
+        $model_sale["total"] = $data['total'];
+        $model_sale["amount_without_tax"] = $data['amount_without_tax'];
+        $model_sale["amount_with_tax"] = $data['amount_with_tax'];
+        $sale->loadData($model_sale);
+        $sale->save();
+
+        foreach ($data as $key=>$item) {
+            $product_sale = new ProductSale();
+            $product_sale->product_id = $item['id'];
+            $product_sale->sale_id = $sale->getId();
+            $product_sale->product_quantity = $item['quantity'];
+            $product_sale->price = $item['price'];
+            $product_sale->tax = $item['tax'];
+            $product_sale->save();
+        }
+
+        Application::$app->session->remove('cart');
+
+        Application::$app->session->setFlash('alert', [
+            "msg" => 'Compra finalizada. Obrigado pela preferência.',
+            "type" => 'success',
+        ]);
+
+        $response->redirect("/");
+    }
+
     public function deleteItemCart(Request $request, Response $response)
     {
         $cart = Application::$app->session->get('cart');
@@ -45,12 +84,19 @@ class SiteController extends Controller
         foreach ($cart['products'] as $key=>$item) {
             if($item['product_id'] === (int)$request->id) {
                 unset($cart['products'][$key]);
-                var_dump("afdfds");
             }
         }
 
         Application::$app->session->remove('cart');
 
+        if(count($cart['products']) <= 0) {
+            Application::$app->session->setFlash('alert', [
+                "msg" => 'Item removido. Carrinho vazio',
+                "type" => 'warning',
+            ]);
+            $response->redirect("/");
+            return;
+        }
         Application::$app->session->set('cart', [
             "products" => $cart['products'],
             "user_id" => $user
@@ -61,6 +107,7 @@ class SiteController extends Controller
             "msg" => 'Item removido.',
             "type" => 'warning',
         ]);
+
         $response->redirect("/cart");
         return;
     }

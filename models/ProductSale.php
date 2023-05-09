@@ -5,11 +5,22 @@ use app\core\db\DbModel;
 
 class ProductSale extends DbModel
 {
+    private int $id_manipulate = 0;
     public int $product_id = 0;
     public int $sale_id = 0;
     public int $product_quantity = 0;
     public float $price = 0.0;
     public float $tax = 0.0;
+
+    public function getId(): int
+    {
+        return $this->id_manipulate;
+    }
+
+    public function setId(int $id): void
+    {
+        $this->id_manipulate = $id;
+    }
 
     public static function tableName(): string
     {

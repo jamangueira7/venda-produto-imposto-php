@@ -8,6 +8,8 @@ use app\core\Model;
 abstract class DbModel extends Model
 {
     abstract public static function tableName(): string;
+    abstract public function getId(): int;
+    abstract public function setId(int $id): void;
     abstract public function attributes(): array;
     public static function primaryKey(): string
     {
@@ -25,6 +27,7 @@ abstract class DbModel extends Model
             $statement->bindValue(":$attribute", $this->{$attribute});
         }
         $statement->execute();
+        $this->setId((int)Application::$app->db->lastInsertId());
         return true;
     }
 
@@ -54,6 +57,7 @@ abstract class DbModel extends Model
         $tableName = static::tableName();
         $attributes = array_keys($where);
         $sql = implode("AND", array_map(fn($attr) => "$attr = :$attr", $attributes));
+
         $statement = self::prepare("SELECT * FROM $tableName WHERE $sql");
         foreach ($where as $key => $item) {
             $statement->bindValue(":$key", $item);

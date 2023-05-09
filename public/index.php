@@ -27,6 +27,7 @@ $app->router->get('/cart', [SiteController::class, 'show']);
 $app->router->post('/cart', [SiteController::class, 'addCart']);
 $app->router->get('/cartdelete', [SiteController::class, 'deleteCart']);
 $app->router->get('/cartdelete/$id', [SiteController::class, 'deleteItemCart']);
+$app->router->get('/buy', [SiteController::class, 'buy']);
 
 $app->router->get('/login', [AuthController::class, 'login']);
 $app->router->post('/login', [AuthController::class, 'login']);

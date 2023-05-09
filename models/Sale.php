@@ -5,6 +5,7 @@ use app\core\db\DbModel;
 
 class Sale extends DbModel
 {
+    private int $id = 0;
     public float $amount = 0.0;
     public float $amount_without_tax = 0.0;
     public float $amount_with_tax = 0.0;
@@ -12,6 +13,16 @@ class Sale extends DbModel
     public static function tableName(): string
     {
         return "sales";
+    }
+
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    public function setId(int $id): void
+    {
+        $this->id = $id;
     }
 
     public function rules(): array

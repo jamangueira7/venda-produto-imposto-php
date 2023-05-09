@@ -5,6 +5,7 @@ use app\core\UserModel;
 
 class User extends UserModel
 {
+    private int $id_manipulate = 0;
     public string $firstname = '';
     public string $lastname = '';
     public string $email = '';
@@ -15,6 +16,16 @@ class User extends UserModel
     public static function tableName(): string
     {
         return "users";
+    }
+
+    public function getId(): int
+    {
+        return $this->id_manipulate;
+    }
+
+    public function setId(int $id): void
+    {
+        $this->id_manipulate = $id;
     }
 
     public function rules(): array
