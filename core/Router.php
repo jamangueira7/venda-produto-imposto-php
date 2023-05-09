@@ -32,7 +32,7 @@ class Router
         $method = $this->request->method();
 
         $path_parts = explode("/", $path);
-        if(is_numeric($path_parts[2]) && count($path_parts) === 3) {
+        if(isset($path_parts[2]) && is_numeric($path_parts[2]) && count($path_parts) === 3) {
             $new_url = "/$path_parts[1]/" .'$id';
             $callback = $this->routes[$method][$new_url] ?? false;
             $this->request->id = $path_parts[2];

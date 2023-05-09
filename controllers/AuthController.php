@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\core\Application;
 use app\core\Controller;
+use app\core\exceptions\ForbiddenException;
 use app\core\middlewares\AuthMiddleware;
 use app\core\Request;
 use app\core\Response;
@@ -48,7 +49,10 @@ class AuthController extends Controller
             $product->loadData($request->getBody());
 
             if($product->validate() && $product->save()) {
-                Application::$app->session->setFlash('success', 'Usuario cadastrado');
+                Application::$app->session->setFlash('alert', [
+                    "msg" => 'Usuario cadastrado',
+                    "type" => 'success',
+                ]);
                 Application::$app->response->redirect("/");
             }
 
@@ -61,7 +65,31 @@ class AuthController extends Controller
 
     public function profile(Request $request, Response $response)
     {
-        return $this->render('profile');
+        if((int)$request->id !== Application::$app->session->get('user')) {
+            throw new ForbiddenException();
+        }
+
+        $product = new User();
+
+        if($request->method() === 'post') {
+            $product->loadData($request->getBody());
+
+            if($product->validate() && $product->change($request->id)) {
+                Application::$app->session->setFlash('alert', [
+                    "msg" => 'Usuario alterado',
+                    "type" => 'success',
+                ]);
+                Application::$app->response->redirect("/");
+            }
+
+        }
+
+        $model = $product->findOne(["id" => $request->id]);
+        $model->password = "";
+
+        return $this->render('profile', [
+            "model" => $model
+        ]);
 
     }
 }

@@ -86,4 +86,11 @@ class Application
     {
         return !self::$app->user;
     }
+
+    public static function isAdmin()
+    {
+        return !self::$app->user->status === 0;
+    }
+
+
 }

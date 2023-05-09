@@ -38,6 +38,12 @@ class User extends UserModel
         return parent::save();
     }
 
+    public function change(int $id)
+    {
+        $this->password = password_hash($this->password, PASSWORD_DEFAULT);
+        return parent::change($id);
+    }
+
     public function attributes(): array
     {
         return ["email", "firstname", "lastname", "status", "password"];

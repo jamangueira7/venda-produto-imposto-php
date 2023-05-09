@@ -5,10 +5,10 @@ use app\core\form\Form;
 
 $form = new Form();
 
-$this->title = "Perfil";
+$this->title = "Criei um usuario";
 ?>
 
-    <h1>Register</h1>
+    <h1>Crie um usuario</h1>
 
 <?php $form = Form::begin('', 'post') ?>
     <div class="row">

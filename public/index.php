@@ -23,6 +23,8 @@ $config = [
 $app = new Application(dirname(__DIR__), $config);
 
 $app->router->get('/', [SiteController::class, 'home']);
+$app->router->get('/cart', [SiteController::class, 'show']);
+$app->router->post('/cart', [SiteController::class, 'addCart']);
 
 $app->router->get('/login', [AuthController::class, 'login']);
 $app->router->post('/login', [AuthController::class, 'login']);
@@ -31,7 +33,8 @@ $app->router->get('/register', [AuthController::class, 'register']);
 $app->router->post('/register', [AuthController::class, 'register']);
 
 $app->router->get('/logout', [AuthController::class, 'logout']);
-$app->router->get('/profile', [AuthController::class, 'profile']);
+$app->router->get('/profile/$id', [AuthController::class, 'profile']);
+$app->router->post('/profile/$id', [AuthController::class, 'profile']);
 
 $app->router->get('/types/list', [ProductTypeController::class, 'list']);
 $app->router->get('/types/$id', [ProductTypeController::class, 'detail']);

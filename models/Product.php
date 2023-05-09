@@ -1,9 +1,9 @@
 <?php
 namespace app\models;
 
-use app\core\UserModel;
+use app\core\db\DbModel;
 
-class Product extends UserModel
+class Product extends DbModel
 {
 
     public string $name = '';
@@ -52,8 +52,30 @@ class Product extends UserModel
         ];
     }
 
-    public function getDisplayName(): string
+    public function prepareData($cart): array
     {
-        return $this->name;
+        $product_type = new ProductType();
+        $products = [];
+
+        foreach ($cart as $item) {
+
+            $val = $this->findOne(["id" => $item['product_id']]);
+            $type = $product_type->findOne(["id" => $val->product_type_id]);
+            $price_quantity =  $item['quantity'] * $val->price;
+            $price_tax = ($price_quantity * $type->tax) / 100;
+            $total = $price_tax + $price_quantity;
+            $products[$val->id] = [
+                "id" => $val->id,
+                "name" => $val->name,
+                "quantity" => $item['quantity'],
+                "price" => $val->price,
+                "price_quantity" => $price_quantity,
+                "tax" => $type->tax,
+                "tax_value" => $price_tax,
+                "price_tax" => $total,
+            ];
+
+        }
+        return $products;
     }
 }

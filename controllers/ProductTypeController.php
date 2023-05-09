@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\core\Application;
 use app\core\Controller;
 use app\core\exceptions\NotFoundException;
+use app\core\middlewares\AdminMiddleware;
 use app\core\middlewares\AuthMiddleware;
 use app\core\Request;
 use app\core\Response;
@@ -16,7 +17,7 @@ class ProductTypeController extends Controller
 {
     public function __construct()
     {
-        //$this->registerMiddleware(new AuthMiddleware(['profile']));
+        $this->registerMiddleware(new AdminMiddleware(['create', "list", "detail"]));
     }
 
     public function create(Request $request, Response $response)

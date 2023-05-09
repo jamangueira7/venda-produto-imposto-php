@@ -7,10 +7,12 @@ use app\core\Application;
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    <link rel="stylesheet" href="/css/style.css">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <title><?php echo $this->title ?></title>
 </head>
@@ -28,33 +30,42 @@ use app\core\Application;
             </li>
         </ul>
 
-        <?php if (Application::$app::isGuest()): ?>
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/login">Login</a>
+
+            <ul class="navbar-nav  mx-5">
+                <li class="nav-item active  mx-5">
+                    <a class="nav-link" href="/cart">
+                        <i class="fa fa-cart-plus" aria-hidden="true"></i>
+                    </a>
                 </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="/register">Register</a>
-                </li>
+                <?php if (Application::$app::isGuest()): ?>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/login">Login</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/register">Register</a>
+                    </li>
+                <?php else: ?>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/logout">Logout</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/profile/<?php echo Application::$app->user->id?>">Bem vindo, <?php echo Application::$app->user->getDisplayName() ?></a>
+                    </li>
+                <?php endif; ?>
             </ul>
-        <?php else: ?>
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/logout">Logout</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="/profile">Bem vindo, <?php echo Application::$app->user->getDisplayName() ?></a>
-                </li>
-            </ul>
-        <?php endif; ?>
+
     </div>
 </nav>
 
 <div class="container">
 
-    <?php if(Application::$app->session->getFlash('success')): ?>
-        <div class="alert alert-success">
-            <?php echo Application::$app->session->getFlash('success') ?>
+    <?php
+    $msg = Application::$app->session->getFlash('alert');
+
+    if($msg):
+    ?>
+        <div class="alert alert-<?php echo $msg['type'] ?>">
+            <?php echo $msg['msg'] ?>
         </div>
     <?php endif; ?>
     {{content}}

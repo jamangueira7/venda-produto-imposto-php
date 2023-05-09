@@ -1,9 +1,9 @@
 <?php
 namespace app\models;
 
-use app\core\UserModel;
+use app\core\db\DbModel;
 
-class ProductType extends UserModel
+class ProductType extends DbModel
 {
     public string $name = '';
     public string $description = '';
@@ -46,10 +46,5 @@ class ProductType extends UserModel
             "description" => "Descrição",
             "tax" => "Procentagem"
         ];
-    }
-
-    public function getDisplayName(): string
-    {
-        return $this->name;
     }
 }
