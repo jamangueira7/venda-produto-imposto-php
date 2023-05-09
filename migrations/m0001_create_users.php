@@ -14,7 +14,7 @@ class m0001_create_users
                 lastname VARCHAR(255) NOT NULL,
                 password VARCHAR(255) NOT NULL,
                 status SMALLINT DEFAULT 0,
-                type SMALLINT DEFAULT 1,
+                type SMALLINT DEFAULT 0,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             );";
 

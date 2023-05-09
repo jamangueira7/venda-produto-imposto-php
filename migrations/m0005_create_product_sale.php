@@ -11,6 +11,8 @@ class m0005_create_product_sale
                 product_id INT NOT NULL,
                 sale_id INT NOT NULL,
                 product_quantity INT NOT NULL,
+                price FLOAT NOT NULL,
+                tax FLOAT NOT NULL,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             );";
 

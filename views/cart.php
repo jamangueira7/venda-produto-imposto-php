@@ -14,6 +14,7 @@ $this->title = "Carrinho de compras";
 <table class="table">
     <thead>
     <tr>
+        <th scope="col"></th>
         <th scope="col">Produto</th>
         <th scope="col">Quantidade</th>
         <th scope="col">Preço unitario</th>
@@ -28,15 +29,18 @@ $this->title = "Carrinho de compras";
     $total_products = 0;
     foreach ($products as $key=>$product):
         $total_products += $product["price_tax"];
+        $img = $product['image'] ?? "default.jpg";
         ?>
         <tr>
-            <td><?php echo $product["name"] ?></td>
-            <td><?php echo $product["quantity"] ?></td>
-            <td>R$<?php echo $product["price"] ?></td>
-            <td>R$<?php echo $product["price_quantity"] ?></td>
-            <td><?php echo $product["tax"] ?>%</td>
-            <td>R$<?php echo $product["tax_value"] ?></td>
-            <td>R$<?php echo $product["price_tax"] ?></td>
+            <td><img src="<?= "/img/". $img; ?>" class="img-cart card-img-top" alt="..."></td>
+            <td><?= $product["name"] ?></td>
+            <td><?= $product["quantity"] ?></td>
+            <td>R$<?= number_format($product["price"], 2, '.', ',') ?></td>
+            <td>R$<?= number_format($product["price_quantity"], 2, '.', ',') ?></td>
+            <td><?= $product["tax"] ?>%</td>
+            <td>R$<?= number_format($product["tax_value"], 2, '.', ',') ?></td>
+            <td>R$<?= number_format($product["price_tax"], 2, '.', ',') ?></td>
+            <td><a href="/cartdelete/<?= $product["id"] ?>" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
         </tr>
     <?php
     endforeach;
@@ -48,13 +52,15 @@ $this->title = "Carrinho de compras";
         <td></td>
         <td></td>
         <td></td>
-        <td class="text-success">R$<?php echo $total_products ?></td>
+        <td></td>
+        <td class="text-success">R$<?= number_format($total_products, 2, '.', ',') ?></td>
+        <td></td>
     </tr>
     </tbody>
 </table>
 
 
 <div class="row mx-md-n5">
-    <a class="btn btn-danger btn-lg col px-md-5 mx-2">Apagar carrinho</a>
-    <a class="btn btn-success btn-lg col px-md-5">Finalizar compra</a>
+    <a href="/cartdelete" class="btn btn-danger btn-lg col px-md-5 mx-2">Apagar carrinho</a>
+    <a href="/buy" class="btn btn-success btn-lg col px-md-5">Finalizar compra</a>
 </div>

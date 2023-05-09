@@ -14,9 +14,10 @@ $this->title = "Bem vindo a loja!";
 <div class="row">
     <?php
     foreach ($products as $product):
+        $img = $product->image ?? "default.jpg";
     ?>
     <div class="card mx-2 my-2" style="width: 22rem;">
-        <img src="..." class="card-img-top" alt="...">
+        <img src="<?= "/img/". $img; ?>" class="img-prods card-img-top" alt="...">
         <div class="card-body">
             <h5 class="card-title"><?php echo $product->name ?></h5>
             <p class="card-text"><?php echo $product->description ?></p>

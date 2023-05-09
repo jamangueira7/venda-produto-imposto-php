@@ -10,8 +10,9 @@ class m0002_create_products
         $SQL = "CREATE TABLE products (
                 id serial PRIMARY KEY,
                 name VARCHAR(255) NOT NULL,
+                image VARCHAR(255) NOT NULL,
                 description VARCHAR(255) NOT NULL,
-                price VARCHAR(255) NOT NULL,
+                price FLOAT NOT NULL,
                 status SMALLINT DEFAULT 1,
                 product_type_id INT NOT NULL,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
