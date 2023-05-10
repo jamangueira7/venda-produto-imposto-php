@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\core\Application;
 use app\core\Controller;
 use app\core\exceptions\NotFoundException;
 use app\core\middlewares\AdminMiddleware;
@@ -53,23 +54,41 @@ class ProductController extends Controller
         $product = new Product();
         $model = new ProductType();
 
-        $data = $product->findOne(["id" => $request->id]);
-
-        if(empty($data)) {
-            throw new NotFoundException();
-        }
-
-
         if($request->method() === 'post') {
             $product->loadData($request->getBody());
+            $product->image = $request->getBody()['image_hidden'];
+
+            if($_FILES['image']['name'] !== "" && $product->image !== $_FILES['image']['name']) {
+                $product->image = 'ft'.time().'.jpg';
+                $dir = dirname(__DIR__) . '/public/img/'. basename($product->image);
+                if(!move_uploaded_file($_FILES['image']['tmp_name'], $dir)){
+                    Application::$app->session->setFlash('alert', [
+                        "msg" => 'Problema para gravar imagem.',
+                        "type" => 'danger',
+                    ]);
+                    $response->redirect("/product/list");
+                }
+            }
+
             if($product->validate() && $product->change($request->id)) {
+                Application::$app->session->setFlash('alert', [
+                    "msg" => 'Produto alterado com sucesso',
+                    "type" => 'success',
+                ]);
                 $response->redirect("/product/list");
                 return;
             }
+        } else {
+            $data = $product->findOne(["id" => $request->id]);
+
+            if(empty($data)) {
+                throw new NotFoundException();
+            }
+            $product->loadData($data);
         }
 
         return $this->render('product_detail', [
-            'model' => $data,
+            'model' => $product,
             'types' => $model->findAll(),
         ]);
 

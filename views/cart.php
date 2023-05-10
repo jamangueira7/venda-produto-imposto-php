@@ -27,19 +27,22 @@ $this->title = "Carrinho de compras";
     <tbody>
     <?php
     $total_products = 0;
+
     foreach ($products as $key=>$product):
-        $total_products += $product["price_tax"];
+        if (!is_int($key)){
+            continue;
+        }
         $img = $product['image'] ?? "default.jpg";
         ?>
         <tr>
             <td><img src="<?= "/img/". $img; ?>" class="img-cart card-img-top" alt="..."></td>
             <td><?= $product["name"] ?></td>
             <td><?= $product["quantity"] ?></td>
-            <td>R$<?= number_format($product["price"], 2, '.', ',') ?></td>
-            <td>R$<?= number_format($product["price_quantity"], 2, '.', ',') ?></td>
+            <td>R$<?= number_format($product["price"], 2, ',', '.') ?></td>
+            <td>R$<?= number_format($product["price_quantity"], 2, ',', '.') ?></td>
             <td><?= $product["tax"] ?>%</td>
-            <td>R$<?= number_format($product["tax_value"], 2, '.', ',') ?></td>
-            <td>R$<?= number_format($product["price_tax"], 2, '.', ',') ?></td>
+            <td>R$<?= number_format($product["tax_value"], 2, ',', '.') ?></td>
+            <td>R$<?= number_format($product["price_tax"], 2, ',', '.') ?></td>
             <td><a href="/cartdelete/<?= $product["id"] ?>" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
         </tr>
     <?php
@@ -53,7 +56,7 @@ $this->title = "Carrinho de compras";
         <td></td>
         <td></td>
         <td></td>
-        <td class="text-success">R$<?= number_format($total_products, 2, '.', ',') ?></td>
+        <td class="text-success">R$<?= number_format($products['total'], 2, ',', '.') ?></td>
         <td></td>
     </tr>
     </tbody>

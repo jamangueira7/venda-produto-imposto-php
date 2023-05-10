@@ -31,11 +31,13 @@ $app->router->get('/buy', [SiteController::class, 'buy']);
 
 $app->router->get('/login', [AuthController::class, 'login']);
 $app->router->post('/login', [AuthController::class, 'login']);
+$app->router->get('/logout', [AuthController::class, 'logout']);
+
+$app->router->get('/users/list', [AuthController::class, 'list']);
 
 $app->router->get('/register', [AuthController::class, 'register']);
 $app->router->post('/register', [AuthController::class, 'register']);
 
-$app->router->get('/logout', [AuthController::class, 'logout']);
 $app->router->get('/profile/$id', [AuthController::class, 'profile']);
 $app->router->post('/profile/$id', [AuthController::class, 'profile']);
 

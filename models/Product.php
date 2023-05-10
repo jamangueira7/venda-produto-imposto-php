@@ -31,8 +31,9 @@ class Product extends DbModel
     public function rules(): array
     {
         return [
-            "name" => [self::RULE_REQUIRED, [self::RULE_UNIQUE, 'class' => self::class]],
+            "name" => [self::RULE_REQUIRED],
             "description" => [self::RULE_REQUIRED],
+            "image" => [self::RULE_REQUIRED],
             "price" => [self::RULE_REQUIRED],
             "product_type_id" => [self::RULE_REQUIRED],
         ];

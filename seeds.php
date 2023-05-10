@@ -42,9 +42,9 @@ foreach ($users as $user) {
 
     $user_model = new \app\models\User();
     $user_model->loadData($user);
+
     if(!$user_model->validate()) {
         echo "ERRO AO CRIAR USUARIO\n";
-        var_dump($user_model);
         continue;
     }
     $user_model->save();
@@ -192,6 +192,7 @@ $sales = [
 ];
 
 echo "*************** CRIANDO VENDAS ****************\n";
+$id_sale = [];
 foreach ($sales as $sale) {
     $sale_model = new \app\models\Sale();
     $sale_model->loadData($sale);
@@ -200,6 +201,40 @@ foreach ($sales as $sale) {
         continue;
     }
     $sale_model->save();
+    $id_sale[] = $sale_model->getId();
+
 }
 echo "*******************************\n";
+
+
+foreach ($id_sale as $id) {
+    $products_sales = [
+        [
+            "product_id" => 1,
+            "sale_id" => $id,
+            "product_quantity" => 2,
+            "price" => 1420.90,
+            "tax" => 12.5,
+        ],
+        [
+            "product_id" => 2,
+            "sale_id" => $id,
+            "product_quantity" => 1,
+            "price" => 420.0,
+            "tax" => 9.5,
+        ]
+    ];
+
+    echo "*************** CRIANDO PRODUTOS DA VENDA ****************\n";
+    foreach ($products_sales as $products_sale) {
+        $products_sale_model = new \app\models\ProductSale();
+        $products_sale_model->loadData($products_sale);
+        if (!$products_sale_model->validate()) {
+            echo "ERRO AO CRIAR VENDA\n";
+            continue;
+        }
+        $products_sale_model->save();
+    }
+}
+echo "**************PROCESSO FINALIZADO*****************\n";
 

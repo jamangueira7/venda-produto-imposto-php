@@ -89,7 +89,10 @@ class Application
 
     public static function isAdmin()
     {
-        return !self::$app->user->status === 0;
+        if(self::isGuest()) {
+            return false;
+        }
+        return self::$app->user->type === 1;
     }
 
 

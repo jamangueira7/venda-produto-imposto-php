@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\core\Application;
 use app\core\Controller;
+use app\core\middlewares\AuthMiddleware;
 use app\core\Request;
 use app\core\Response;
 use app\models\Cart;
@@ -15,6 +16,10 @@ use app\models\Sale;
 class SiteController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->registerMiddleware(new AuthMiddleware(['show']));
+    }
     public function home()
     {
         $product = new Product();
@@ -58,6 +63,9 @@ class SiteController extends Controller
 
         foreach ($data as $key=>$item) {
             $product_sale = new ProductSale();
+            if(!is_int($key)) {
+                continue;
+            }
             $product_sale->product_id = $item['id'];
             $product_sale->sale_id = $sale->getId();
             $product_sale->product_quantity = $item['quantity'];
@@ -185,6 +193,13 @@ class SiteController extends Controller
 
         if($cart) {
             $data = $product->prepareData($cart['products']);
+        } else {
+            Application::$app->session->setFlash('alert', [
+                "msg" => 'Carrinho vazio.',
+                "type" => 'warning',
+            ]);
+            $response->redirect("/");
+            return;
         }
 
         return $this->render('cart', [

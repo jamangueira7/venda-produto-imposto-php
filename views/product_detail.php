@@ -6,15 +6,19 @@ use app\core\form\Form;
 $form = new Form();
 
 $this->title = "Detalhe do produto";
+var_dump($model);
 ?>
 
 <h1 class="display-3 text-center m-lg-5">Detalhe do produto</h1>
 
-<?php $form = Form::begin('', 'post') ?>
+<?php $form = Form::begin('', 'post', ['enctype'=>"multipart/form-data"]) ?>
 
             <?php echo $form->field($model, 'name') ?>
             <?php echo $form->field($model, 'description') ?>
             <?php echo $form->field($model, 'price') ?>
+            <?php echo $form->field($model, 'image')->fileField() ?>
+            <input type="hidden" id="image_hidden" name="image_hidden" value="<?php echo $model->image ?>" />
+
             <div class="form-group">
                 <label for="product_type_id">Tipo</label>
 

@@ -9,7 +9,14 @@ $this->title = "Lista de produtos";
 ?>
 
 
-<h1 class="display-3 text-center m-lg-5">Tipos de produtos</h1>
+
+<h1 class="display-3 text-center m-lg-5">Lista de produtos</h1>
+<div class="row">
+    <div class="col-md-10">
+    </div>
+    <a class="btn btn-success my-3" href="/product/create" role="button"><i class="fa fa-plus" aria-hidden="true"></i> Criar</a>
+</div>
+
 
 <table class="table">
     <thead>

@@ -10,6 +10,7 @@ class User extends UserModel
     public string $lastname = '';
     public string $email = '';
     public int $status = 0;
+    public int $type = 0;
     public string $password = '';
     public string $passwordConfirm = '';
 
@@ -57,7 +58,7 @@ class User extends UserModel
 
     public function attributes(): array
     {
-        return ["email", "firstname", "lastname", "status", "password"];
+        return ["email", "firstname", "lastname", "status", "password", "type"];
     }
 
     public function labels(): array
@@ -67,6 +68,7 @@ class User extends UserModel
             "firstname" => "Nome",
             "lastname" => "Sobrenome",
             "status" => "Status",
+            "type" => "Tipo",
             "password" => "Senha",
             "passwordConfirm" => "Confirme senha"
         ];

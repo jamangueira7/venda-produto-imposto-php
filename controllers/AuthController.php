@@ -37,6 +37,7 @@ class AuthController extends Controller
 
     public function logout(Request $request, Response $response)
     {
+        Application::$app->session->remove('cart');
         Application::$app->logout();
         $response->redirect("/");
 
@@ -65,7 +66,7 @@ class AuthController extends Controller
 
     public function profile(Request $request, Response $response)
     {
-        if((int)$request->id !== Application::$app->session->get('user')) {
+        if(!Application::$app::isAdmin() && (int)$request->id !== Application::$app->session->get('user')) {
             throw new ForbiddenException();
         }
 
@@ -91,5 +92,14 @@ class AuthController extends Controller
             "model" => $model
         ]);
 
+    }
+
+    public function list(Request $request, Response $response)
+    {
+        $model = new User();
+
+        return $this->render('users_list', [
+            'model' => $model->findAll()
+        ]);
     }
 }

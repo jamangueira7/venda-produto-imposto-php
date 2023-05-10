@@ -28,6 +28,18 @@ use app\core\Application;
             <li class="nav-item active">
                 <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
             </li>
+
+            <?php if (Application::$app::isAdmin()): ?>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/product/list">Produtos <span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/types/list">Tipo produto <span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/users/list">Usuarios <span class="sr-only"></span></a>
+                </li>
+            <?php endif; ?>
         </ul>
 
 
