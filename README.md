@@ -20,58 +20,58 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 Projeto de uma loja.
 
-- Criando migrations
+* Criando migrations
 ![img_14.png](.github%2Fimg_14.png)
 
-- Criando seeds
+* Criando seeds
 ![img_15.png](.github%2Fimg_15.png)
 
-- Tela inicial listando os produtos (sem estar logado)
+* Tela inicial listando os produtos (sem estar logado)
 ![img.png](.github%2Fimg.png)
 
-- Tela de login
+* Tela de login
 ![img_1.png](.github%2Fimg_1.png)
 
-- Tela para se cadastrar.
+* Tela para se cadastrar.
 ![img_2.png](.github%2Fimg_2.png)
 
-- Carrinho
+* Carrinho
   ![img_4.png](.github%2Fimg_4.png)
 
-- Tela inicial após login (visão Admin)
+* Tela inicial após login (visão Admin)
 ![img_3.png](.github%2Fimg_3.png)
 
-- Lista de produtos
+* Lista de produtos
 ![img_6.png](.github%2Fimg_6.png)
 
-- Detalhe do produto 
+* Detalhe do produto 
 ![img_5.png](.github%2Fimg_5.png)
 
-- Criação do produto
+* Criação do produto
 ![img_7.png](.github%2Fimg_7.png)
 
-- Lista de tipo de produto
+* Lista de tipo de produto
 ![img_8.png](.github%2Fimg_8.png)
 
-- Detalhe do tipo de produto
+* Detalhe do tipo de produto
 ![img_9.png](.github%2Fimg_9.png)
 
-- Criação do tipo deproduto
+* Criação do tipo deproduto
 ![img_10.png](.github%2Fimg_10.png)
 
-- Lista de usuário
+* Lista de usuário
 ![img_12.png](.github%2Fimg_12.png)
 
-- Detalhe do usuário
+* Detalhe do usuário
 ![img_11.png](.github%2Fimg_11.png)
 
-- Criação do usuário
+* Criação do usuário
 ![img_13.png](.github%2Fimg_13.png)
 
-- Lista de compras
+* Lista de compras
 ![img_16.png](.github%2Fimg_16.png)
 
-- Detalhes da compra
+* Detalhes da compra
 ![img_17.png](.github%2Fimg_17.png)
 
 ### Pre-requisitos
