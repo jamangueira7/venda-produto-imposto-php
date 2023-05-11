@@ -2,7 +2,7 @@
   <a href="#-projeto">Projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; 
   <a href="#-como-rodar">Como rodar</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-como-contribuir">Como contribuir</a>&nbsp;&nbsp;&nbsp;
-  </p>
+</p>
 <br>
 
 
@@ -11,8 +11,8 @@
 Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 - [JavaScript](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript)
-- [PHP](https://www.php.net/) - 8.1.18
-- [Postgre](https://www.postgresql.org/) - 12
+- [PHP](https://www.php.net/) 8.1.18
+- [Postgre](https://www.postgresql.org/) 12
 - [HTML5](https://developer.mozilla.org/pt-BR/docs/Web/HTML/Element) 
 - [CSS3](https://developer.mozilla.org/pt-BR/docs/Web/CSS)
 
