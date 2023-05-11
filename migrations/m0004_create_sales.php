@@ -10,6 +10,7 @@ class m0004_create_sales
         $SQL = "CREATE TABLE sales (
                 id serial PRIMARY KEY,
                 amount FLOAT NOT NULL,
+                user_id INT NOT NULL,
                 amount_without_tax FLOAT NOT NULL,
                 amount_with_tax FLOAT NOT NULL,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP

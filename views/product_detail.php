@@ -6,7 +6,6 @@ use app\core\form\Form;
 $form = new Form();
 
 $this->title = "Detalhe do produto";
-var_dump($model);
 ?>
 
 <h1 class="display-3 text-center m-lg-5">Detalhe do produto</h1>

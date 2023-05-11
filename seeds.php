@@ -193,7 +193,8 @@ $sales = [
 
 echo "*************** CRIANDO VENDAS ****************\n";
 $id_sale = [];
-foreach ($sales as $sale) {
+foreach ($sales as $key=>$sale) {
+    $sale['user_id'] = $key+1;
     $sale_model = new \app\models\Sale();
     $sale_model->loadData($sale);
     if(!$sale_model->validate()) {

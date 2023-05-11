@@ -55,7 +55,8 @@ class SiteController extends Controller
         }
 
         $sale = new Sale();
-        $model_sale["total"] = $data['total'];
+        $model_sale["amount"] = $data['total'];
+        $model_sale["user_id"] = $user;
         $model_sale["amount_without_tax"] = $data['amount_without_tax'];
         $model_sale["amount_with_tax"] = $data['amount_with_tax'];
         $sale->loadData($model_sale);

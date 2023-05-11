@@ -39,6 +39,14 @@ use app\core\Application;
                 <li class="nav-item active">
                     <a class="nav-link" href="/users/list">Usuarios <span class="sr-only"></span></a>
                 </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/shopping/list">Compras <span class="sr-only"></span></a>
+                </li>
+            <?php endif; ?>
+            <?php if (!Application::$app::isGuest()): ?>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/myshopping">Minhas compras <span class="sr-only"></span></a>
+                </li>
             <?php endif; ?>
         </ul>
 

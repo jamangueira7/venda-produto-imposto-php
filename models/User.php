@@ -78,4 +78,11 @@ class User extends UserModel
     {
         return $this->firstname . " " . $this->lastname;
     }
+
+    public function getFullNameById(int $id): string
+    {
+        $data = $this->findOne(["id" => $id]);
+
+        return $data->firstname . " " . $data->lastname;
+    }
 }

@@ -4,6 +4,7 @@ use app\controllers\SiteController;
 use app\controllers\AuthController;
 use app\controllers\ProductTypeController;
 use app\controllers\ProductController;
+use app\controllers\ShoppingController;
 use app\core\Application;
 
 require_once __DIR__ . '/../vendor/autoload.php';
@@ -32,6 +33,10 @@ $app->router->get('/buy', [SiteController::class, 'buy']);
 $app->router->get('/login', [AuthController::class, 'login']);
 $app->router->post('/login', [AuthController::class, 'login']);
 $app->router->get('/logout', [AuthController::class, 'logout']);
+
+$app->router->get('/shopping/list', [ShoppingController::class, 'list']);
+$app->router->get('/shopping/$id', [ShoppingController::class, 'detail']);
+$app->router->get('/myshopping', [ShoppingController::class, 'myshopping']);
 
 $app->router->get('/users/list', [AuthController::class, 'list']);
 

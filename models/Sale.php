@@ -5,7 +5,8 @@ use app\core\db\DbModel;
 
 class Sale extends DbModel
 {
-    private int $id = 0;
+    private int $id_manipulate = 0;
+    public int $user_id = 0;
     public float $amount = 0.0;
     public float $amount_without_tax = 0.0;
     public float $amount_with_tax = 0.0;
@@ -17,12 +18,12 @@ class Sale extends DbModel
 
     public function getId(): int
     {
-        return $this->id;
+        return $this->id_manipulate;
     }
 
     public function setId(int $id): void
     {
-        $this->id = $id;
+        $this->id_manipulate = $id;
     }
 
     public function rules(): array
@@ -41,7 +42,7 @@ class Sale extends DbModel
 
     public function attributes(): array
     {
-        return ["amount", "amount_without_tax", "amount_with_tax"];
+        return ["amount", "amount_without_tax", "amount_with_tax", "user_id"];
     }
 
     public function labels(): array
